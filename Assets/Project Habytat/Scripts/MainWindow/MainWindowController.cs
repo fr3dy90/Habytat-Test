@@ -13,7 +13,7 @@ public class MainWindowController : MonoBehaviour
     private const float _zero = 0;
     private const float _one = 1;
 
-    public void OnShowWindow(string _title, string _leyend, bool _closePanel, bool _rejectBtn, bool _confirmBtn, Action onClosePanel = null, string _txtConfirmBtn = null, Action onConfirmBtn = null, string _txtRejectmBtn = null, Action onRejectBtn = null)
+    public void OnShowWindow(string _title, string _leyend, bool _closePanel, Action onClosePanel = null, string _txtConfirmBtn = null, Action onConfirmBtn = null, string _txtRejectmBtn = null, Action onRejectBtn = null)
     {
         _view._canvasGroup.alpha = _zero;
         _view._canvasGroup.blocksRaycasts = true;
@@ -50,11 +50,11 @@ public class MainWindowController : MonoBehaviour
             StopCoroutine(onShowPanel);
         }
 
-        onShowPanel = OnShowPanel(_zero, _closePanel, _rejectBtn, _confirmBtn);
+        onShowPanel = OnShowPanel(_zero, _closePanel, !string.IsNullOrEmpty(_txtRejectmBtn), !string.IsNullOrEmpty(_txtConfirmBtn));
         StartCoroutine(onShowPanel);
     }
     
-    public void OnRefreshWindow(string _title, string _leyend, bool _closePanel, bool _rejectBtn, bool _confirmBtn, Action onClosePanel = null, string _txtConfirmBtn = null, Action onConfirmBtn = null, string _txtRejectmBtn = null, Action onRejectBtn = null)
+    public void OnRefreshWindow(string _title, string _leyend, bool _closePanel, Action onClosePanel = null, string _txtConfirmBtn = null, Action onConfirmBtn = null, string _txtRejectmBtn = null, Action onRejectBtn = null)
     {
         HideButtons(false);
         
@@ -89,7 +89,7 @@ public class MainWindowController : MonoBehaviour
             StopCoroutine(onShowButtons);
         }
 
-        onShowButtons = OnShowButtons(_closePanel, _rejectBtn, _confirmBtn);
+        onShowButtons = OnShowButtons(_closePanel, !string.IsNullOrEmpty(_txtRejectmBtn), !string.IsNullOrEmpty(_txtConfirmBtn));
         StartCoroutine(onShowButtons);
     }
 
