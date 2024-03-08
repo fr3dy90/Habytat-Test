@@ -22,9 +22,12 @@ public class ThirdPersonController : MonoBehaviour
    [SerializeField] private Camera _camera;
 
    [Header("Sensor")] 
-   [SerializeField] private float _sensorRadius = .2f;
-   [SerializeField] private float _distance = 1f;
-   [SerializeField] private Color _castColor;
+   [SerializeField] private float _sensorRadius = .15f;
+   [SerializeField] private float _distance = .9f;
+
+   [Header("Debug sensor")] 
+   [SerializeField] Vector3 _hitPoint;
+   [SerializeField] Color _castColor;
 
    private void Awake()
    {
@@ -62,6 +65,20 @@ public class ThirdPersonController : MonoBehaviour
          _rb.velocity = horizontalVelocity.normalized * _maxSpeed + Vector3.up * _rb.velocity.y;
    }
 
+   private void LookDirection()
+   {
+      Vector3 direction = _rb.velocity;
+      direction.y = 0;
+      if(_move.ReadValue<Vector2>().sqrMagnitude > .1f && direction.sqrMagnitude > .1f)
+      {
+         _rb.rotation = Quaternion.LookRotation(direction, Vector3.up);
+      }
+      else
+      {
+         _rb.angularVelocity = Vector3.zero;
+      }
+   }
+
    private Vector3 GetCameraForward(Camera camera1)
    {
       Vector3 forward = camera1.transform.forward;
@@ -78,22 +95,31 @@ public class ThirdPersonController : MonoBehaviour
 
    private void Jump(InputAction.CallbackContext obj)
    {
-      if (IsGroinded())
+      if (IsGrounded())
       {
          forceDirection += Vector3.up * _jumpForce;
       }
    }
 
-   private bool IsGroinded()
+   private bool IsGrounded()
    {
-      Physics.SphereCast(transform.position, _sensorRadius, transform.up * -1, out RaycastHit _hit, _distance);
+      Physics.SphereCast(transform.position + Vector3.up,_sensorRadius, transform.up * -1,out RaycastHit _hit, _distance);
       _castColor = _hit.transform != null ? Color.green : Color.red;
+      _hitPoint = _hit.point;
       return _hit.transform != null;
    }
 
    private void OnDrawGizmos()
    {
       Gizmos.color = _castColor;
-      Gizmos.DrawWireSphere((transform.up *-1)*_distance, _sensorRadius);
+      Gizmos.DrawWireSphere(transform.position + Vector3.up, _sensorRadius);
+      if (IsGrounded())
+      {
+         Gizmos.DrawWireSphere(_hitPoint + Vector3.up * _sensorRadius, _sensorRadius);
+      }
+      else
+      {
+         Gizmos.DrawWireSphere(transform.position + Vector3.up + Vector3.down * _distance, _sensorRadius);
+      }
    }
 }

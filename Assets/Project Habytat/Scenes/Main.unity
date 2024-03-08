@@ -608,9 +608,10 @@ MonoBehaviour:
   _jumpForce: 5
   _maxSpeed: 5
   _camera: {fileID: 961739752}
-  _sensorRadius: 0.2
-  _distance: 1
-  _castColor: {r: 0, g: 0, b: 0, a: 1}
+  _sensorRadius: 0.45
+  _distance: 0.616
+  _hitPoint: {x: 0, y: 0, z: 0}
+  _castColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!54 &1755360302
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -661,6 +662,26 @@ CapsuleCollider:
   m_Height: 3
   m_Direction: 1
   m_Center: {x: 0, y: 1.5, z: 0}
+--- !u!95 &1755360305 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 0037d7220df763d4aa4ea00ebf248fa2,
+    type: 3}
+  m_PrefabInstance: {fileID: 1865556340}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1755360306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1755360300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f95bca9371db33a4c89d3e604f2a066d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animator: {fileID: 1755360305}
+  _rb: {fileID: 1755360302}
 --- !u!1001 &1865556340
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -677,7 +698,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 0037d7220df763d4aa4ea00ebf248fa2,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.558
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0037d7220df763d4aa4ea00ebf248fa2,
         type: 3}
@@ -724,6 +745,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Panda
       objectReference: {fileID: 0}
+    - target: {fileID: 5506070619204933503, guid: 0037d7220df763d4aa4ea00ebf248fa2,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 39a5bc357dba0e243860fd171f3310d8, type: 2}
+    - target: {fileID: 5866666021909216657, guid: 0037d7220df763d4aa4ea00ebf248fa2,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: abc67a2ef1d3fac4b932c135990d597a, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -740,6 +771,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1755360301}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0037d7220df763d4aa4ea00ebf248fa2,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1755360306}
   m_SourcePrefab: {fileID: 100100000, guid: 0037d7220df763d4aa4ea00ebf248fa2, type: 3}
 --- !u!1 &2143457867
 GameObject:
@@ -766,7 +801,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2143457867}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
   m_Name: 
