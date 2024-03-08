@@ -10,6 +10,9 @@ public class ThirdPersonController : MonoBehaviour
    [SerializeField] private InputPlayerActions _inputPlayerActions;
    [SerializeField] private InputAction _move;
 
+   [Header("Animations")] 
+   [SerializeField] private ThirdPersonAnimation _thirdPersonAnimation;
+
    [Header("movement fields")] 
    [SerializeField] private Rigidbody _rb;
    [SerializeField] private float _movementForce = 1f;
@@ -33,11 +36,13 @@ public class ThirdPersonController : MonoBehaviour
    {
       _rb = GetComponent<Rigidbody>();
       _inputPlayerActions ??= new();
+      _thirdPersonAnimation = GetComponent<ThirdPersonAnimation>();
    }
 
    private void OnEnable()
    {
       _inputPlayerActions.Player.Jump.started += Jump;
+      _inputPlayerActions.Player.Attack.started += Punch;
       _move = _inputPlayerActions.Player.Move;
       _inputPlayerActions.Player.Enable();
    }
@@ -45,6 +50,7 @@ public class ThirdPersonController : MonoBehaviour
    private void OnDisable()
    {
       _inputPlayerActions.Player.Jump.started -= Jump;
+      _inputPlayerActions.Player.Attack.started -= Punch;
       _inputPlayerActions.Player.Disable();
    }
 
@@ -63,6 +69,8 @@ public class ThirdPersonController : MonoBehaviour
       horizontalVelocity.y = 0;
       if (horizontalVelocity.sqrMagnitude > _maxSpeed * _maxSpeed)
          _rb.velocity = horizontalVelocity.normalized * _maxSpeed + Vector3.up * _rb.velocity.y;
+      
+      LookDirection();
    }
 
    private void LookDirection()
@@ -107,6 +115,11 @@ public class ThirdPersonController : MonoBehaviour
       _castColor = _hit.transform != null ? Color.green : Color.red;
       _hitPoint = _hit.point;
       return _hit.transform != null;
+   }
+   
+   private void Punch(InputAction.CallbackContext obj)
+   {
+      _thirdPersonAnimation.OnPunch();
    }
 
    private void OnDrawGizmos()

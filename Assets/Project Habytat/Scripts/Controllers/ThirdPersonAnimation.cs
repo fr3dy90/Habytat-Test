@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(Animator))]
@@ -19,5 +20,10 @@ public class ThirdPersonAnimation : MonoBehaviour
     void Update()
     {
         _animator.SetFloat("Speed", _rb.velocity.magnitude / _maxSpeed);
+    }
+    
+    public void OnPunch()
+    {
+        _animator.SetTrigger("Punch");
     }
 }
