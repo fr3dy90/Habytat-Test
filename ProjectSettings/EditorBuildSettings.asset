@@ -6,6 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
+    path: Assets/Project Habytat/Scenes/Master.unity
+    guid: 9855a408307926647aefad989a250e1f
+  - enabled: 1
+    path: Assets/Project Habytat/Scenes/Main.unity
+    guid: ca163c926602c5640ba7193d39089749
+  - enabled: 1
+    path: Assets/Project Habytat/Scenes/Game.unity
+    guid: 4b7a3e9deee58984ab5efd05f125c64b
+  - enabled: 1
+    path: Assets/Project Habytat/Scenes/Bonus.unity
+    guid: dac3b680ded328a438562267a4ef0bfe
   m_configObjects: {}
