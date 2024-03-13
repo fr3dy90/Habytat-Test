@@ -10,6 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ab7a7ea4490357c40beefd9646ce63dc, type: 3}
-  m_Name: SceneModelMain
+  m_Name: Main
   m_EditorClassIdentifier: 
-  actualScene: 0
+  sceneLoad: 0
+  sceneUnload: 0
+  actualSceneState: 0

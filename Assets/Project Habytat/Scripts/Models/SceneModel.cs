@@ -1,8 +1,17 @@
+using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "SceneModel", menuName = "ScriptableObjects/SceneModel")]
+[CreateAssetMenu(fileName = "NewSceneModel", menuName = "SceneModel")]
 public class SceneModel : ScriptableObject
 {
-   public SceneName actualSceneName;
-   public SceneState actualSceneState;
+    public List<GameScenes> scenesToGo;
+    public SceneInitializationPoint initializationPoint;
+}
+
+public enum SceneInitializationPoint
+{
+    None,
+    OnInit,
+    OnStart,
+    Manual 
 }
